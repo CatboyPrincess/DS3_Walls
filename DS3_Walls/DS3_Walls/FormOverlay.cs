@@ -17,6 +17,8 @@ namespace DS3_Walls {
         IntPtr handle = FindWindow(null, WINDOW_NAME);
         RECT rect;
 
+        Graphics graphics;
+
         private struct RECT {
             public int left, top, right, bottom;
         }
@@ -43,15 +45,35 @@ namespace DS3_Walls {
             this.TransparencyKey = Color.Magenta;
             this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
-            //this.DoubleBuffered = true;
+            this.DoubleBuffered = true;
 
             int initialStyle = GetWindowLong(this.Handle, -20);
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
 
-            GetWindowRect(handle, out rect);
-            this.Size = new Size(rect.right - rect.left, rect.bottom - rect.top);
-            this.Top = rect.top;
-            this.Left = rect.left;
+            bool result = GetWindowRect(handle, out rect);
+            if (result) {
+                this.Size = new Size(rect.right - rect.left, rect.bottom - rect.top);
+                this.Top = rect.top;
+                this.Left = rect.left;
+            }
+            else {
+                this.Size = new Size(800, 600);
+                this.Top = 0;
+                this.Left = 0;
+            }
+        }
+
+        private void FormOverlay_Paint(object sender, PaintEventArgs e) {
+            graphics = e.Graphics;
+            SolidBrush brush = new SolidBrush(Color.White);
+            Pen pen = new Pen(brush, 2.0f);
+            Font font = new Font("Arial", 14);
+
+            int x = this.Left + 200;
+            int y = this.Top + 200;
+
+            graphics.DrawString("testing this thingy", font, brush, x, y);
+            graphics.DrawRectangle(pen, x, y, x + 100, y + 150);
         }
     }
 }
