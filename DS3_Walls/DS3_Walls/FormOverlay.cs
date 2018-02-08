@@ -52,7 +52,7 @@ namespace DS3_Walls {
         public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
         [DllImport("kernel32.dll")]
-        public static extern bool ReadProcessMemory(int hProcess, Int64 lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
+        public static extern bool ReadProcessMemory(int hProcess, UInt64 lpBaseAddress, byte[] lpBuffer, int dwSize, ref int lpNumberOfBytesRead);
 
         public FormOverlay() {
             InitializeComponent();
@@ -98,20 +98,23 @@ namespace DS3_Walls {
             int y = this.Top + 10;
 
             // process
-            Process process = Process.GetProcessesByName("DarkSoulsIII")[0];
-            IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
-            int bytesRead = 0;
-            byte[] buffer = new byte[4]; // memory needed
-            Int64 address = 0x7FF5AEE12780; // placeholder. Still need a way to get the right address every time
+            Process [] processes = Process.GetProcessesByName("DarkSoulsIII");
+            if (processes.Length > 0) {
+                Process process = processes[0];
+                IntPtr processHandle = OpenProcess(PROCESS_WM_READ, false, process.Id);
+                int bytesRead = 0;
+                byte[] buffer = new byte[4]; // memory needed
+                UInt64 address = 0x7FF5AEE12780; // placeholder. Still need a way to get the right address every time
 
-            ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
+                ReadProcessMemory((int)processHandle, address, buffer, buffer.Length, ref bytesRead);
 
-            float coord_x = BitConverter.ToSingle(buffer, 0);
-            //System.Console.WriteLine(x);
+                float coord_x = BitConverter.ToSingle(buffer, 0);
+                //System.Console.WriteLine(x);
 
-            // paint
-            //graphics.Clear(backgroundColour);
-            graphics.DrawString("Player Coordinates:\nA = na" + "\nX = " + coord_x + "\nY = na" + "\nZ = na", font, brush, x, y);
+                // paint
+                //graphics.Clear(backgroundColour);
+                graphics.DrawString("Player Coordinates:\nA = na" + "\nX = " + coord_x + "\nY = na" + "\nZ = na", font, brush, x, y);
+            }
         }
     }
 }
