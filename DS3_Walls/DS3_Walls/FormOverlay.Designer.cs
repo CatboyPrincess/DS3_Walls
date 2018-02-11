@@ -32,7 +32,9 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Name = "FormOverlay";
             this.Text = "DS3 Walls Overlay";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormOverlay_FormClosing);
             this.Load += new System.EventHandler(this.FormOverlay_Load);
+            this.VisibleChanged += new System.EventHandler(this.FormOverlay_VisibleChangedAsync);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.FormOverlay_Paint);
             this.ResumeLayout(false);
 
