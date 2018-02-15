@@ -1,6 +1,12 @@
 # DS3_Walls
 dark souls 3 walls and radar or whatever
 
+## Usage
+
+Enable the overlay with the checkbox while DS3 is open.
+
+Re-checking the checkbox should attempt to re-hook to DS3 if something happens.
+
 ## Resources Used
 
 * https://www.youtube.com/watch?v=t1ErGj0YnaM
