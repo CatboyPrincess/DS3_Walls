@@ -18,7 +18,7 @@ namespace DS3_Walls {
         private const string PROCESS_NAME = "DarkSoulsIII";
         private const int DEFAULT_WIDTH = 1920;
         private const int DEFAULT_HEIGHT = 1080;
-        private const int FONT_SIZE = 16;
+        private const int FONT_SIZE = 12;
         private const int PROCESS_WM_READ = 0x0010;
         private const float min_resolution = 15;
 
