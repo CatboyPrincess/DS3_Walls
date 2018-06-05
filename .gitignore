@@ -215,3 +215,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+DS3_Walls/.vs/DS3_Walls/v15/Server/sqlite3/storage.ide-wal
+DS3_Walls/.vs/DS3_Walls/v15/Server/sqlite3/storage.ide-shm
